@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gcp-project
+  namespace: {{ .Values.namespace }}
+data:
+  project_id: {{ .Values.projectID }}

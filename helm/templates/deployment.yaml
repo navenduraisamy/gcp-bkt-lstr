@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+    spec:
+      serviceAccout: {{ .Values.serviceAccount.name }}
+      containers:
+      - name: gcp-bkt-lstr-app
+        image: "{{ .Values.app.image }}:{{ .Values.app.tag }}"
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            path: /api/healthz
+            port: {{ .Values.service.port }}
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        env:
+        - name: GCP_PROJECT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: gcp-project
+              key: project_id
+        resources:
+          requests:
+            memory: "250Mi"
+            cpu: "500m"
+          limits:
+            memory: "500Mi"
+            cpu: "1"
+        ports:
+        - containerPort: {{ .Values.service.port }}
+      imagePullSecrets:
+      - name: gh-cred

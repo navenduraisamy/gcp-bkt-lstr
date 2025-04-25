@@ -1,0 +1,15 @@
+namespace: wi-test-ns
+projectID:
+gcpServiceAccount: 
+
+app:
+  name: gcp-bkt-lstr
+  image: "ghcr.io/navenduraisamy/gcp-bkt-lstr"
+  tag: "v1.0.0"
+
+service:
+  type: ClusterIP
+  port: 8080
+
+serviceAccount:
+  name: gcs-access-sa
