@@ -12,7 +12,7 @@ spec:
       labels:
         app: {{ .Values.app.name }}
     spec:
-      serviceAccout: {{ .Values.serviceAccount.name }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
       containers:
       - name: gcp-bkt-lstr-app
         image: "{{ .Values.app.image }}:{{ .Values.app.tag }}"

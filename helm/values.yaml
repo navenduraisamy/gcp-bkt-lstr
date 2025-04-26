@@ -1,6 +1,6 @@
 namespace: wi-test-ns
-projectID:
-gcpServiceAccount: 
+projectID: qwiklabs-gcp-02-003c1dcef22e
+gcpServiceAccount: wi-test-sa@qwiklabs-gcp-02-003c1dcef22e.iam.gserviceaccount.com
 
 app:
   name: gcp-bkt-lstr
@@ -8,7 +8,7 @@ app:
   tag: "v1.0.0"
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 8080
 
 serviceAccount:
